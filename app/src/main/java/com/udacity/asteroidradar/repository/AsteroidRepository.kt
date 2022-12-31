@@ -38,12 +38,7 @@ class AsteroidRepository(private val database: AsteroidDatabase) {
 
     @RequiresApi(Build.VERSION_CODES.O)
     val weekAsteroids: LiveData<List<Asteroid>> =
-        Transformations.map(
-            database.asteroidDao.getAsteroidsDate(
-                startDate.format(DateTimeFormatter.ISO_DATE),
-                startDate.format(DateTimeFormatter.ISO_DATE)
-            )
-        ) {
+        Transformations.map(database.asteroidDao.getAsteroids()) {
             it.asDomainModel()
         }
 
